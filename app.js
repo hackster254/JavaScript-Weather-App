@@ -1,4 +1,5 @@
 import {Http} from "./http.js";
+import {WeatherData, WEATHER_PROXY_HANDLER} from "./weather-data.js";
 
 const ELEMENT_SEARCH_BUTTON = document.querySelector('button');
 const ELEMENT_SEARCH_CITY = document.getElementById('city');
@@ -22,7 +23,9 @@ function searchWeather() {
     const URL = `http://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&units=metric&appid=${APP_ID}`;
     Http.fetchData(URL)
         .then(responseData => {
-
+            const WEATHER_DATA = new WeatherData(CITY_NAME, responseData.weather[0].description.toUpperCase());
+            const WEATHER_PROXY = new Proxy(WEATHER_DATA, WEATHER_PROXY_HANDLER);
+            WEATHER_PROXY.temperature = responseData.main.temp;
         })
         .catch(error => alert(error));
 }
