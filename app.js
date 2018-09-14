@@ -20,7 +20,12 @@ function searchWeather() {
     if (CITY_NAME.length === 0) {
         return alert("You did not enter a city name");
     }
+
+    ELEMENT_LOADING_TEXT.style.display = 'block';
+    ELEMENT_WEATHER_BOX.style.display = 'none';
+
     const URL = `http://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&units=metric&appid=${APP_ID}`;
+
     Http.fetchData(URL)
         .then(responseData => {
             const WEATHER_DATA = new WeatherData(CITY_NAME, responseData.weather[0].description.toUpperCase());
@@ -36,5 +41,6 @@ function updateWeather(weatherData) {
     ELEMENT_WEATHER_DESCRIPTION.textContent = weatherData.description;
     ELEMENT_WEATHER_TEMPERATURE.textContent = weatherData.temperature;
 
+    ELEMENT_LOADING_TEXT.style.display = 'none';
     ELEMENT_WEATHER_BOX.style.display = 'block';
 }
