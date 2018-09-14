@@ -1,3 +1,5 @@
+import {Http} from "./http.js";
+
 const ELEMENT_SEARCH_BUTTON = document.querySelector('button');
 const ELEMENT_SEARCH_CITY = document.getElementById('city');
 
@@ -8,6 +10,8 @@ const ELEMENT_WEATHER_CITY = ELEMENT_WEATHER_BOX.firstElementChild;
 const ELEMENT_WEATHER_DESCRIPTION = document.getElementById('weatherDescription');
 const ELEMENT_WEATHER_TEMPERATURE = ELEMENT_WEATHER_BOX.lastElementChild;
 
+const APP_ID = 'c9204738afe16537dde4cccc5db59ce0';
+
 ELEMENT_SEARCH_BUTTON.addEventListener('click', searchWeather);
 
 function searchWeather() {
@@ -15,5 +19,10 @@ function searchWeather() {
     if (CITY_NAME.length === 0) {
         return alert("You did not enter a city name");
     }
-    alert(CITY_NAME);
+    const URL = `http://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&units=metric&appid=${APP_ID}`;
+    Http.fetchData(URL)
+        .then(responseData => {
+
+        })
+        .catch(error => alert(error));
 }
