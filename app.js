@@ -26,6 +26,15 @@ function searchWeather() {
             const WEATHER_DATA = new WeatherData(CITY_NAME, responseData.weather[0].description.toUpperCase());
             const WEATHER_PROXY = new Proxy(WEATHER_DATA, WEATHER_PROXY_HANDLER);
             WEATHER_PROXY.temperature = responseData.main.temp;
+            updateWeather(WEATHER_PROXY);
         })
         .catch(error => alert(error));
+}
+
+function updateWeather(weatherData) {
+    ELEMENT_WEATHER_CITY.textContent = weatherData.cityName;
+    ELEMENT_WEATHER_DESCRIPTION.textContent = weatherData.description;
+    ELEMENT_WEATHER_TEMPERATURE.textContent = weatherData.temperature;
+
+    ELEMENT_WEATHER_BOX.style.display = 'block';
 }
