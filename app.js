@@ -1,28 +1,19 @@
 import {Http} from "./http.js";
 import {WeatherData, WEATHER_PROXY_HANDLER} from "./weather-data.js";
-
-const ELEMENT_SEARCH_BUTTON = document.querySelector('button');
-const ELEMENT_SEARCH_CITY = document.getElementById('city');
-
-const ELEMENT_LOADING_TEXT = document.getElementById('load');
-const ELEMENT_WEATHER_BOX = document.getElementById('weather');
-
-const ELEMENT_WEATHER_CITY = ELEMENT_WEATHER_BOX.firstElementChild;
-const ELEMENT_WEATHER_DESCRIPTION = document.getElementById('weatherDescription');
-const ELEMENT_WEATHER_TEMPERATURE = ELEMENT_WEATHER_BOX.lastElementChild;
+import * as ELEMENTS from './elements.js';
 
 const APP_ID = 'c9204738afe16537dde4cccc5db59ce0';
 
-ELEMENT_SEARCH_BUTTON.addEventListener('click', searchWeather);
+ELEMENTS.ELEMENT_SEARCH_BUTTON.addEventListener('click', searchWeather);
 
 function searchWeather() {
-    const CITY_NAME = ELEMENT_SEARCH_CITY.value.trim();
+    const CITY_NAME = ELEMENTS.ELEMENT_SEARCH_CITY.value.trim();
     if (CITY_NAME.length === 0) {
         return alert("You did not enter a city name");
     }
 
-    ELEMENT_LOADING_TEXT.style.display = 'block';
-    ELEMENT_WEATHER_BOX.style.display = 'none';
+    ELEMENTS.ELEMENT_LOADING_TEXT.style.display = 'block';
+    ELEMENTS.ELEMENT_WEATHER_BOX.style.display = 'none';
 
     const URL = `http://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&units=metric&appid=${APP_ID}`;
 
@@ -37,10 +28,10 @@ function searchWeather() {
 }
 
 function updateWeather(weatherData) {
-    ELEMENT_WEATHER_CITY.textContent = weatherData.cityName;
-    ELEMENT_WEATHER_DESCRIPTION.textContent = weatherData.description;
-    ELEMENT_WEATHER_TEMPERATURE.textContent = weatherData.temperature;
+    ELEMENTS.ELEMENT_WEATHER_CITY.textContent = weatherData.cityName;
+    ELEMENTS.ELEMENT_WEATHER_DESCRIPTION.textContent = weatherData.description;
+    ELEMENTS.ELEMENT_WEATHER_TEMPERATURE.textContent = weatherData.temperature;
 
-    ELEMENT_LOADING_TEXT.style.display = 'none';
-    ELEMENT_WEATHER_BOX.style.display = 'block';
+    ELEMENTS.ELEMENT_LOADING_TEXT.style.display = 'none';
+    ELEMENTS.ELEMENT_WEATHER_BOX.style.display = 'block';
 }
