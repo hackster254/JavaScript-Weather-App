@@ -12,7 +12,7 @@ export const WEATHER_PROXY_HANDLER = {
     },
     set: function (target, property, value) {
         // converts celsius to fahrenheit
-        const newValue = (value * 1.8 + 32).toFixed(2) + 'F.';
+        const newValue = (value * 1.8 + 32).toFixed(2) + ' °F';
         return Reflect.set(target, property, newValue);
     }
 };
