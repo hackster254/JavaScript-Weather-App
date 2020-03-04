@@ -2,7 +2,8 @@ import {Http} from "./http.js";
 import {WeatherData, WEATHER_PROXY_HANDLER} from "./weather-data.js";
 import * as ELEMENTS from './elements.js';
 
-const APP_ID = 'c9204738afe16537dde4cccc5db59ce0';
+//const APP_ID = 'c9204738afe16537dde4cccc5db59ce0';
+const APP_ID= '342a4d26d34ce2cdc6a80272d44c12f6';
 
 ELEMENTS.ELEMENT_SEARCH_BUTTON.addEventListener('click', searchWeather);
 
